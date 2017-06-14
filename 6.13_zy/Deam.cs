@@ -41,7 +41,7 @@ namespace _6._13_zy
                 }
                 else
                 {
-                    Console.WriteLine("用户名不能为空！");
+                    Console.WriteLine("输入的信息不能为空值！");
                 }
             }
             catch (Exception ex)
@@ -86,7 +86,7 @@ namespace _6._13_zy
                 }
                 else
                 {
-                    Console.WriteLine("用户名不能为空！");
+                    Console.WriteLine("输入的信息不能为空值！");
                 }
             }
             catch (Exception ex)
@@ -106,31 +106,38 @@ namespace _6._13_zy
         /// 删除
         /// </summary>
         public static void Delete() {
-            try { 
 
-            Console.WriteLine("请输入要删除的ID：");
-             int id = Convert.ToInt32(Console.ReadLine());
-            if (id!=0)
-            {
-                //向数据库中删除数据
-                string stradd = string.Format("DELETE dbo.UserInfo WHERE UserId={0}",id);
-                //创建一个命令对象
-                SqlCommand cmd = new SqlCommand(stradd, Program.con);
-                //打开连接
-                Program.con.Open();
-                //返回受影响的行数
-                int count = cmd.ExecuteNonQuery();
-                Console.WriteLine("删除成功，{0}条记录", count);
-            }
-            else
-            {
-                Console.WriteLine("请输入删除人的id！");
-            }
-        }
+ 
+            try {
+
+
+                Console.WriteLine("请输入要删除的ID：");
+                int id = Convert.ToInt32(Console.ReadLine());
+                      //打开连接
+                      Program.con.Open();
+                    //向数据库中删除数据
+                    string stradd = string.Format("DELETE dbo.UserInfo WHERE UserId={0}", id);
+                    //创建一个命令对象
+                    SqlCommand cmd = new SqlCommand(stradd, Program.con);
+
+                    //返回受影响的行数
+                    int count = cmd.ExecuteNonQuery();
+                    Console.WriteLine("删除成功，{0}条记录", count);
+
+                if (count>0)
+                {
+                    Console.WriteLine("删除成功！");
+                }
+                else
+                {
+                    Console.WriteLine("删除失败！");
+                }
+                }
             catch (Exception ex)
             {
 
                 Console.WriteLine(ex.Message);
+              
             }
             finally
             {
@@ -147,8 +154,6 @@ namespace _6._13_zy
             {
                 Console.WriteLine("请输入要修改记录的id");
                 int id =Convert.ToInt32(Console.ReadLine());
-
-
                 Console.WriteLine("请输入姓名");
                 string name = Console.ReadLine();
                 Console.WriteLine("请输入性别（0表示女，1表示男）：");
@@ -157,8 +162,7 @@ namespace _6._13_zy
                 int age = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("请输入邮箱地址：");
                 string email = Console.ReadLine();
-                if (id != 0)
-                {
+       
                     //向数据库中修改数据
                     string stradd = string.Format("UPDATE dbo.UserInfo SET UserName='{0}',UserSex={1},UserAge={2},UserEmail='{3}' WHERE UserId={4}",name,sex,age,email,id);
                     //创建一个命令对象
@@ -168,11 +172,16 @@ namespace _6._13_zy
                     //返回受影响的行数
                     int count = cmd.ExecuteNonQuery();
                     Console.WriteLine("修改成功，{0}条记录", count);
+
+                if (count > 0)
+                {
+                    Console.WriteLine("修改成功！");
                 }
                 else
                 {
-                    Console.WriteLine("请输入修改人的id！");
+                    Console.WriteLine("修改失败！");
                 }
+
 
             }
             catch (Exception ex)

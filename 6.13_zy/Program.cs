@@ -52,10 +52,9 @@ namespace _6._13_zy
                     break;
             }
 
+        }
 
             Console.ReadKey();
-
         }
-    }
 }
 }
